@@ -8,5 +8,12 @@
             "email": "latusschnecke@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Steelvirus\\LaravelPermissions\\SteelPermissionsServiceProvider"
+            ]
+        }
+    }
 }
