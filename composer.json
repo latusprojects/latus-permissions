@@ -1,0 +1,12 @@
+{
+    "name": "steelvirus/laravel-permissions",
+    "type": "library",
+    "description": "",
+    "authors": [
+        {
+            "name": "Max Latussek",
+            "email": "latusschnecke@gmail.com"
+        }
+    ],
+    "require": {}
+}
