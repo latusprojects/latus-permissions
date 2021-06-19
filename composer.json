@@ -1,5 +1,5 @@
 {
-    "name": "steelvirus/laravel-permissions",
+    "name": "latusprojects/latus-permissions",
     "type": "library",
     "description": "",
     "authors": [
@@ -13,13 +13,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Steelvirus\\LaravelPermissions\\": "src/"
+            "Latus\\Permissions\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Steelvirus\\LaravelPermissions\\SteelPermissionsServiceProvider"
+                "Latus\\Permissions\\LatusPermissionsServiceProvider"
             ]
         }
     }

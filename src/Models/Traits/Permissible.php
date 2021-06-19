@@ -1,9 +1,9 @@
 <?php
 
-namespace Steelvirus\LaravelPermissions\Models\Traits;
+namespace Latus\Permissions\Models\Traits;
 
-use Steelvirus\LaravelPermissions\Models\Permission;
-use Steelvirus\LaravelPermissions\Models\Role;
+use Latus\Permissions\Models\Permission;
+use Latus\Permissions\Models\Role;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

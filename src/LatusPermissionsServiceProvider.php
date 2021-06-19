@@ -1,10 +1,10 @@
 <?php
 
-namespace Steelvirus\LaravelPermissions;
+namespace Latus\Permissions;
 
 use Illuminate\Support\ServiceProvider;
 
-class SteelPermissionsServiceProvider extends ServiceProvider
+class LatusPermissionsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

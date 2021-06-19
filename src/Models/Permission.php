@@ -1,6 +1,6 @@
 <?php
 
-namespace Steelvirus\LaravelPermissions\Models;
+namespace Latus\Permissions\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
