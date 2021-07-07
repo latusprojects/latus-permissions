@@ -19,4 +19,9 @@ class PermissionRepository extends EloquentRepository implements PermissionRepos
     {
         $permission->delete();
     }
+
+    public function findByName(string $name): Permission|null
+    {
+        return $this->model->where('name', $name)->first();
+    }
 }

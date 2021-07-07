@@ -10,4 +10,6 @@ use Latus\Repositories\Contracts\Repository;
 interface PermissionRepository extends Repository
 {
     public function delete(Permission $permission);
+
+    public function findByName(string $name): Permission|null;
 }

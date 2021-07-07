@@ -19,4 +19,9 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     {
         $user->delete();
     }
+
+    public function findByName(string $name): User|null
+    {
+        return $this->model->where('name', $name)->first();
+    }
 }

@@ -19,4 +19,9 @@ class RoleRepository extends EloquentRepository implements RoleRepositoryContrac
     {
         $role->delete();
     }
+
+    public function findByName(string $name): Role|null
+    {
+        return $this->model->where('name', $name)->first();
+    }
 }

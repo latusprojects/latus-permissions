@@ -6,6 +6,7 @@ namespace Latus\Permissions\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Latus\Permissions\Models\User;
 use Latus\Permissions\Repositories\Contracts\UserRepository;
 
 class UserService
@@ -34,5 +35,19 @@ class UserService
         return $this->userRepository->create($attributes);
     }
 
+    public function find(int|string $id): Model|null
+    {
+        return $this->userRepository->find($id);
+    }
+
+    public function findByName(string $name): Model|null
+    {
+        return $this->userRepository->findByName($name);
+    }
+
+    public function deletePermission(User $user)
+    {
+        return $this->userRepository->delete($user);
+    }
 
 }

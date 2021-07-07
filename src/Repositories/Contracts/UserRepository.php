@@ -10,4 +10,6 @@ use Latus\Repositories\Contracts\Repository;
 interface UserRepository extends Repository
 {
     public function delete(User $user);
+
+    public function findByName(string $name): User|null;
 }
