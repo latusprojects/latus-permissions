@@ -3,6 +3,7 @@
 
 namespace Latus\Permissions\Repositories\Eloquent;
 
+use Illuminate\Support\Collection;
 use Latus\Permissions\Models\User;
 use Latus\Permissions\Repositories\Contracts\UserRepository as UserRepositoryContract;
 use Latus\Repositories\EloquentRepository;
@@ -23,5 +24,10 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     public function findByName(string $name): User|null
     {
         return $this->model->where('name', $name)->first();
+    }
+
+    public function resolvePermissions(User $user): Collection
+    {
+        return $user->resolvePermissions();
     }
 }
