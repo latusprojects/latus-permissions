@@ -5,6 +5,7 @@ namespace Latus\Permissions\Services;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Latus\Permissions\Models\User;
 use Latus\Permissions\Repositories\Contracts\UserRepository;
@@ -45,9 +46,14 @@ class UserService
         return $this->userRepository->findByName($name);
     }
 
-    public function deletePermission(User $user)
+    public function deleteUser(User $user)
     {
         return $this->userRepository->delete($user);
+    }
+
+    public function resolveRolePermissions(User $user): Collection
+    {
+        return $this->userRepository->resolvePermissions($user);
     }
 
 }

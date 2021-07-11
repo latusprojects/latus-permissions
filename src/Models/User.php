@@ -3,13 +3,15 @@
 namespace Latus\Permissions\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Latus\Permissions\Models\Traits\Permissible;
+use Latus\Permissions\Models\Traits\ResolvesPermissions;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Permissible;
+    use HasFactory, Notifiable, Permissible, ResolvesPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -40,5 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected array $resolvable_relationship_methods = [
+        'roles'
+    ];
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class)->withTimestamps();
+    }
 
 }
