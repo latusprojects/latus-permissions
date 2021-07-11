@@ -22,6 +22,24 @@ class Role extends Model
         return $this->permissions()->get();
     }
 
+    public function resolvePermissions(): \Illuminate\Support\Collection
+    {
+        $simple_permissions = $this->permissions()->where('name', 'not like', '%.*')->get()->pluck('guard', 'name')->all();
+
+        $wildcard_permissions = $this->permissions()->where('name', 'like', '%.*')->get()->pluck('guard', 'name')->all();
+
+        foreach ($wildcard_permissions as $wildcard_permission => $wildcard_permission_guard) {
+            $simple_permissions += Permission::where('name', 'like', substr($wildcard_permission, 0, -1) . '%')
+                ->where('name', 'not like', '%.*')
+                ->whereNotIn('name', array_keys($simple_permissions))
+                ->get()
+                ->pluck('guard', 'name')
+                ->all();
+        }
+
+        return new \Illuminate\Support\Collection($simple_permissions);
+    }
+
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class)->withTimestamps();
