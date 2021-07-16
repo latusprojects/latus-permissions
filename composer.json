@@ -1,28 +1,28 @@
 {
-    "name": "latusprojects/latus-permissions",
-    "type": "library",
-    "description": "",
-    "authors": [
-        {
-            "name": "Max Latussek",
-            "email": "latusschnecke@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^8.0",
-        "laravel/framework": "8.*",
-        "latusprojects/latus-model-repositories": "dev-master"
-    },
-    "autoload": {
-        "psr-4": {
-            "Latus\\Permissions\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Latus\\Permissions\\LatusPermissionsServiceProvider"
-            ]
-        }
+  "name": "latusprojects/latus-permissions",
+  "type": "library",
+  "description": "",
+  "authors": [
+    {
+      "name": "Max Latussek",
+      "email": "latusschnecke@gmail.com"
     }
+  ],
+  "require": {
+    "php": "^8.0",
+    "laravel/framework": "8.*",
+    "latusprojects/latus-model-repositories": "dev-develop"
+  },
+  "autoload": {
+    "psr-4": {
+      "Latus\\Permissions\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Latus\\Permissions\\LatusPermissionsServiceProvider"
+      ]
+    }
+  }
 }
