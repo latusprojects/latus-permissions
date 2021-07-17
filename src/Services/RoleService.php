@@ -5,6 +5,7 @@ namespace Latus\Permissions\Services;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Latus\Permissions\Models\Role;
 use Latus\Permissions\Repositories\Contracts\RoleRepository;
@@ -44,9 +45,14 @@ class RoleService
         return $this->roleRepository->findByName($name);
     }
 
-    public function deletePermission(Role $role)
+    public function deleteRole(Role $role)
     {
         return $this->roleRepository->delete($role);
+    }
+
+    public function resolveRolePermissions(Role $role): Collection
+    {
+        return $this->roleRepository->resolvePermissions($role);
     }
 
 
