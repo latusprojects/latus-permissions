@@ -14,7 +14,7 @@ class RoleService
 {
 
     public static array $create_validation_rules = [
-        'name' => 'required|string|min:5',
+        'name' => 'required|string|min:3',
         'level' => 'required|integer|min:0|max:65556',
     ];
 
