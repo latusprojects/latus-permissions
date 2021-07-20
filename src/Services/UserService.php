@@ -7,6 +7,8 @@ namespace Latus\Permissions\Services;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+use Latus\Permissions\Models\Permission;
+use Latus\Permissions\Models\Role;
 use Latus\Permissions\Models\User;
 use Latus\Permissions\Repositories\Contracts\UserRepository;
 
@@ -51,9 +53,49 @@ class UserService
         return $this->userRepository->delete($user);
     }
 
-    public function resolveRolePermissions(User $user): Collection
+    public function addRoleToUser(User $user, Role $role)
     {
-        return $this->userRepository->resolvePermissions($user);
+        $this->userRepository->addRole($user, $role);
+    }
+
+    public function removeRoleFromUser(User $user, Role $role): int
+    {
+        return $this->userRepository->removeRole($user, $role);
+    }
+
+    public function getRolesOfUser(User $user): Collection
+    {
+        return $this->userRepository->getRoles($user);
+    }
+
+    public function userHasRole(User $user, Role $role): bool
+    {
+        return $this->userRepository->hasRole($user, $role);
+    }
+
+    public function addPermissionToUser(User $user, Permission $permission)
+    {
+        $this->userRepository->addPermission($user, $permission);
+    }
+
+    public function removePermissionFromUser(User $user, Permission $permission): int
+    {
+        return $this->userRepository->removePermission($user, $permission);
+    }
+
+    public function getPermissionsOfUser(User $user): Collection
+    {
+        return $this->userRepository->getPermissions($user);
+    }
+
+    public function getResolvedPermissionsOfUser(User $user): Collection
+    {
+        return $this->userRepository->getResolvedPermissions($user);
+    }
+
+    public function userHasPermission(User $user, Permission $permission): bool
+    {
+        return $this->userRepository->hasPermission($user, $permission);
     }
 
 }

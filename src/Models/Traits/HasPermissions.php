@@ -5,7 +5,7 @@ namespace Latus\Permissions\Models\Traits;
 use Latus\Permissions\Models\Permission;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-trait Permissible
+trait HasPermissions
 {
     use ResolvesPermissions;
 
