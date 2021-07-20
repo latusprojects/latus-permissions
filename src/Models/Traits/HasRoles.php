@@ -9,7 +9,7 @@ use Latus\Permissions\Models\Role;
 
 trait HasRoles
 {
-    use Permissible;
+    use HasPermissions;
 
     public function primaryRole(): Role
     {
