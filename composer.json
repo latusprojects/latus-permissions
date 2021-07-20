@@ -24,5 +24,12 @@
         "Latus\\Permissions\\LatusPermissionsServiceProvider"
       ]
     }
-  }
+  },
+  "repositories": {
+    "0": {
+      "type": "composer",
+      "url": "https://latusprojects.repo.repman.io"
+    }
+  },
+  "minimum-stability": "dev"
 }
