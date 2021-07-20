@@ -3,14 +3,11 @@
 namespace Latus\Permissions\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use App\Models\User;
-use Latus\Permissions\Models\Traits\Permissible;
 
-class Role extends Model
+class Role extends ModelWithPermissible
 {
-    use HasFactory, Permissible;
+    use HasFactory;
 
     public function users(): BelongsToMany
     {
