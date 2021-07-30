@@ -4,6 +4,7 @@
 namespace Latus\Permissions\Repositories\Eloquent;
 
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Latus\Permissions\Models\Contracts\Permissible;
 use Latus\Permissions\Models\Permission;
@@ -12,9 +13,10 @@ use Latus\Permissions\Repositories\Contracts\PermissionRepository as PermissionR
 
 class PermissionRepository extends EloquentRepository implements PermissionRepositoryContract
 {
-    public function __construct(Permission $permission)
+
+    public function relatedModel(): Model
     {
-        parent::__construct($permission);
+        return new Permission();
     }
 
     public function delete(Permission $permission)
@@ -24,7 +26,7 @@ class PermissionRepository extends EloquentRepository implements PermissionRepos
 
     public function findByName(string $name): Permission|null
     {
-        return $this->model->where('name', $name)->first();
+        return $this->relatedModel()->where('name', $name)->first();
     }
 
     public function grantTo(Permission $permission, Permissible $permissible)

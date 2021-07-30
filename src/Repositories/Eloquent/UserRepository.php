@@ -3,6 +3,7 @@
 
 namespace Latus\Permissions\Repositories\Eloquent;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Latus\Permissions\Models\Permission;
 use Latus\Permissions\Models\Role;
@@ -13,9 +14,9 @@ use Latus\Repositories\EloquentRepository;
 class UserRepository extends EloquentRepository implements UserRepositoryContract
 {
 
-    public function __construct(User $user)
+    public function relatedModel(): Model
     {
-        parent::__construct($user);
+        return new User();
     }
 
     public function delete(User $user)
@@ -25,7 +26,7 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
 
     public function findByName(string $name): User|null
     {
-        return $this->model->where('name', $name)->first();
+        return $this->relatedModel()->where('name', $name)->first();
     }
 
     public function addRole(User $user, Role $role)
