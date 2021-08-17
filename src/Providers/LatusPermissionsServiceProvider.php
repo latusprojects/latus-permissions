@@ -1,6 +1,6 @@
 <?php
 
-namespace Latus\Permissions;
+namespace Latus\Permissions\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Latus\Permissions\Repositories\Contracts\PermissionRepository as PermissionRepositoryContract;
@@ -39,6 +39,6 @@ class LatusPermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 }
