@@ -99,4 +99,10 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     {
         return $user->resolvePermissions()->contains($permission);
     }
+
+    public function updateRememberToken(User $user, string $token)
+    {
+        $user->setRememberToken($token);
+        $user->save();
+    }
 }

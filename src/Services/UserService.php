@@ -108,4 +108,9 @@ class UserService
         return $this->userRepository->hasPermission($user, $permission);
     }
 
+    public function updateRememberTokenOfUser(User $user, string $token)
+    {
+        $this->userRepository->updateRememberToken($user, $token);
+    }
+
 }
