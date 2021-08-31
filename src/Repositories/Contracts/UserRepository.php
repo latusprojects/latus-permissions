@@ -16,6 +16,10 @@ interface UserRepository extends Repository
 
     public function findByName(string $name): User|null;
 
+    public function findByEmail(string $email): User|null;
+
+    public function findByCredentials(array $credentials): User|null;
+
     public function addRole(User $user, Role $role);
 
     public function removeRole(User $user, Role $role): int;

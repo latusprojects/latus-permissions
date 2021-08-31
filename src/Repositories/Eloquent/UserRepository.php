@@ -3,8 +3,10 @@
 
 namespace Latus\Permissions\Repositories\Eloquent;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Latus\Permissions\Models\Permission;
 use Latus\Permissions\Models\Role;
 use Latus\Permissions\Models\User;
@@ -27,6 +29,30 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     public function findByName(string $name): User|null
     {
         return $this->relatedModel()->where('name', $name)->first();
+    }
+
+    public function findByEmail(string $email): User|null
+    {
+        return $this->relatedModel()->where('email', $email)->first();
+    }
+
+    public function findByCredentials(array $credentials): User|null
+    {
+        $query = $this->relatedModel();
+
+        foreach ($credentials as $key => $value) {
+            if (Str::contains($key, 'password')) {
+                continue;
+            }
+
+            if (is_array($value) || $value instanceof Arrayable) {
+                $query->whereIn($key, $value);
+            } else {
+                $query->where($key, $value);
+            }
+        }
+
+        return $query->first();
     }
 
     public function addRole(User $user, Role $role)

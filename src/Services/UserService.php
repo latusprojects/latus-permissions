@@ -48,6 +48,16 @@ class UserService
         return $this->userRepository->findByName($name);
     }
 
+    public function findByEmail(string $email): Model|null
+    {
+        return $this->userRepository->findByEmail($email);
+    }
+
+    public function findByCredentials(array $credentials): User|null
+    {
+        return $this->userRepository->findByCredentials($credentials);
+    }
+
     public function deleteUser(User $user)
     {
         return $this->userRepository->delete($user);
