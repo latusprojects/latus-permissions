@@ -48,6 +48,16 @@ class UserService
         return $this->userRepository->findByName($name);
     }
 
+    public function findByEmail(string $email): Model|null
+    {
+        return $this->userRepository->findByEmail($email);
+    }
+
+    public function findByCredentials(array $credentials): User|null
+    {
+        return $this->userRepository->findByCredentials($credentials);
+    }
+
     public function deleteUser(User $user)
     {
         return $this->userRepository->delete($user);
@@ -96,6 +106,11 @@ class UserService
     public function userHasPermission(User $user, Permission $permission): bool
     {
         return $this->userRepository->hasPermission($user, $permission);
+    }
+
+    public function updateRememberTokenOfUser(User $user, string $token)
+    {
+        $this->userRepository->updateRememberToken($user, $token);
     }
 
 }
