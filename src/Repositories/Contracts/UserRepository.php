@@ -38,5 +38,9 @@ interface UserRepository extends Repository
 
     public function hasPermission(User $user, Permission $permission): bool;
 
+    public function hasPermissionByString(User $user, string $permission): bool;
+
+    public function hasOnePermissionByStrings(User $user, array $permissions): bool;
+
     public function updateRememberToken(User $user, string $token);
 }

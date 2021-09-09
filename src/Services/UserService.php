@@ -108,6 +108,16 @@ class UserService
         return $this->userRepository->hasPermission($user, $permission);
     }
 
+    public function userHasPermissionByString(User $user, string $permission): bool
+    {
+        return $this->userRepository->hasPermissionByString($user, $permission);
+    }
+
+    public function userHasOnePermissionByStrings(User $user, array $permissions): bool
+    {
+        return $this->userRepository->hasOnePermissionByStrings($user, $permissions);
+    }
+
     public function updateRememberTokenOfUser(User $user, string $token)
     {
         $this->userRepository->updateRememberToken($user, $token);
