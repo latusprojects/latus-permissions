@@ -100,6 +100,16 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
         return $user->resolvePermissions()->contains($permission);
     }
 
+    public function hasPermissionByString(User $user, string $permission): bool
+    {
+        return $user->hasPermission($permission);
+    }
+
+    public function hasOnePermissionByStrings(User $user, array $permissions): bool
+    {
+        return $user->hasOnePermission($permissions);
+    }
+
     public function updateRememberToken(User $user, string $token)
     {
         $user->setRememberToken($token);
