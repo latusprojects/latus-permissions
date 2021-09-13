@@ -12,11 +12,21 @@ class Permission extends Model
 
     protected $fillable = ['name', 'guard'];
 
+    /**
+     * Gets all roles that were granted this permission
+     *
+     * @return BelongsToMany
+     */
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
 
+    /**
+     * Gets all users that were granted this permission
+     *
+     * @return BelongsToMany
+     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withTimestamps();
