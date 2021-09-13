@@ -28,7 +28,7 @@ interface PermissionRepository extends Repository
     public function findByName(string $name): Permission|null;
 
     /**
-     * Grants a permission to a specific user
+     * Grants a permission to a specific permissible model
      *
      * @param Permission $permission
      * @param Permissible $permissible
@@ -37,7 +37,7 @@ interface PermissionRepository extends Repository
     public function grantTo(Permission $permission, Permissible $permissible);
 
     /**
-     * Revokes a permission from a specific user
+     * Revokes a permission from a specific permissible model
      *
      * @param Permission $permission
      * @param Permissible $permissible
@@ -46,7 +46,7 @@ interface PermissionRepository extends Repository
     public function revokeFrom(Permission $permission, Permissible $permissible): int;
 
     /**
-     * Checks if a permission is granted to a specific user
+     * Checks if a permission is granted to a specific permissible model
      *
      * @param Permission $permission
      * @param Permissible $permissible
