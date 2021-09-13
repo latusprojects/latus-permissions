@@ -6,6 +6,7 @@ namespace Latus\Permissions\Models\Traits;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Latus\Permissions\Models\Contracts\Permissible;
 use Latus\Permissions\Models\Permission;
 
 trait ResolvesPermissions
@@ -13,6 +14,9 @@ trait ResolvesPermissions
 
     protected array $resolvable_relationship_methods = [];
 
+    /**
+     * @see Permissible::resolvePermissions()
+     */
     public function resolvePermissions(): Collection
     {
         return Cache::remember($this->getTable() . '_' . $this->getKey(), 60, function () {

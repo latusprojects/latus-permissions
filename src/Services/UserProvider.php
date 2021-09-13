@@ -9,6 +9,9 @@ use Latus\Permissions\Models\User;
 class UserProvider implements \Illuminate\Contracts\Auth\UserProvider
 {
 
+    /**
+     * @param UserService $userService
+     */
     public function __construct(
         protected UserService $userService
     )
@@ -83,6 +86,13 @@ class UserProvider implements \Illuminate\Contracts\Auth\UserProvider
         return $user;
     }
 
+    /**
+     * Validate a user by the given credentials
+     *
+     * @param Authenticatable $user
+     * @param array $credentials
+     * @return bool
+     */
     public function validateCredentials(Authenticatable $user, array $credentials): bool
     {
         return Hash::check(

@@ -14,62 +14,97 @@ use Latus\Permissions\Repositories\Contracts\RoleRepository as RoleRepositoryCon
 
 class RoleRepository extends EloquentRepository implements RoleRepositoryContract
 {
-
+    /**
+     * @inheritDoc
+     */
     public function relatedModel(): Model
     {
         return new Role();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete(Role $role)
     {
         $role->delete();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function findByName(string $name): Role|null
     {
         return $this->relatedModel()->where('name', $name)->first();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function addPermission(Role $role, Permission $permission)
     {
         $role->permissions()->attach($permission->id);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function removePermission(Role $role, Permission $permission): int
     {
         return $role->permissions()->detach($permission->id);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getPermissions(Role $role): Collection
     {
         return $role->permissions()->get();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getResolvedPermissions(Role $role): Collection
     {
         return $role->resolvePermissions();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function hasPermission(Role $role, Permission $permission): bool
     {
         return $role->resolvePermissions()->contains($permission);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function addUser(Role $role, User $user)
     {
         $role->users()->attach($user->id);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function removeUser(Role $role, User $user): int
     {
         return $role->users()->detach($user->id);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getUsers(Role $role): Collection
     {
         return $role->users()->get();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function hasUser(Role $role, User $user): bool
     {
         return $role->users()->where('user_id', $user->id)->exists();

@@ -14,31 +14,49 @@ use Latus\Permissions\Repositories\Contracts\PermissionRepository as PermissionR
 class PermissionRepository extends EloquentRepository implements PermissionRepositoryContract
 {
 
+    /**
+     * @inheritDoc
+     */
     public function relatedModel(): Model
     {
         return new Permission();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete(Permission $permission)
     {
         $permission->delete();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function findByName(string $name): Permission|null
     {
         return $this->relatedModel()->where('name', $name)->first();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function grantTo(Permission $permission, Permissible $permissible)
     {
         $permissible->permissions()->attach($permission->id);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function revokeFrom(Permission $permission, Permissible $permissible): int
     {
         return $permissible->permissions()->detach($permission->id);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isGrantedTo(Permission $permission, Permissible $permissible, bool $resolvePermissions = true): bool
     {
         if ($resolvePermissions) {
@@ -47,11 +65,17 @@ class PermissionRepository extends EloquentRepository implements PermissionRepos
         return $permissible->permissions()->where('permission_id', $permission->id)->exists();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getRoles(Permission $permission): Collection
     {
         return $permission->roles()->get();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getUsers(Permission $permission): Collection
     {
         return $permission->users()->get();
