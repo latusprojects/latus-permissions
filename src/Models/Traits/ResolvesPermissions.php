@@ -24,8 +24,14 @@ trait ResolvesPermissions
 
             if (!empty($this->resolvable_relationship_methods)) {
                 foreach ($this->resolvable_relationship_methods as $relationship_method) {
-                    $relationship = $this->$relationship_method()->get();
-                    $simple_permissions += $relationship->resolvePermissions()->toArray();
+                    /**
+                     * @var Collection $relationships
+                     */
+                    $relationships = $this->$relationship_method()->get();
+
+                    foreach ($relationships as $relationship) {
+                        $simple_permissions += $relationship->resolvePermissions()->toArray();
+                    }
                 }
             }
 
@@ -49,6 +55,6 @@ trait ResolvesPermissions
 
             return new Collection($simple_permissions);
         });
-        
+
     }
 }
