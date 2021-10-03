@@ -6,6 +6,7 @@ namespace Latus\Permissions\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Latus\Permissions\Models\Permission;
 use Latus\Permissions\Models\Role;
@@ -45,6 +46,8 @@ class UserService
         if ($validator->fails()) {
             throw new \InvalidArgumentException($validator->errors()->first());
         }
+
+        $attributes['password'] = Hash::make($attributes['password']);
 
         return $this->userRepository->create($attributes);
     }
@@ -104,7 +107,7 @@ class UserService
      * @return mixed
      * @see UserRepository::delete()
      */
-    public function deleteUser(User $user)
+    public function deleteUser(User $user): mixed
     {
         return $this->userRepository->delete($user);
     }
