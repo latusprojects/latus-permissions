@@ -21,7 +21,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Latus\\Permissions\\Providers\\LatusPermissionsServiceProvider"
+        "Latus\\Permissions\\Providers\\PermissionsServiceProvider"
       ]
     }
   },

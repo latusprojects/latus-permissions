@@ -10,7 +10,7 @@ use Latus\Permissions\Repositories\Eloquent\RoleRepository;
 use Latus\Permissions\Repositories\Contracts\UserRepository as UserRepositoryContract;
 use Latus\Permissions\Repositories\Eloquent\UserRepository;
 
-class LatusPermissionsServiceProvider extends ServiceProvider
+class PermissionsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -30,6 +30,8 @@ class LatusPermissionsServiceProvider extends ServiceProvider
         if (!$this->app->bound(UserRepositoryContract::class)) {
             $this->app->bind(UserRepositoryContract::class, UserRepository::class);
         }
+
+        $this->app->register(AuthServiceProvider::class);
     }
 
     /**
