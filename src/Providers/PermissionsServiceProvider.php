@@ -30,6 +30,8 @@ class PermissionsServiceProvider extends ServiceProvider
         if (!$this->app->bound(UserRepositoryContract::class)) {
             $this->app->bind(UserRepositoryContract::class, UserRepository::class);
         }
+
+        $this->app->register(AuthServiceProvider::class);
     }
 
     /**
