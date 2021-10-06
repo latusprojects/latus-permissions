@@ -60,9 +60,9 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
             }
 
             if (is_array($value) || $value instanceof Arrayable) {
-                $query->whereIn($key, $value);
+                $query = $query->whereIn($key, $value);
             } else {
-                $query->where($key, $value);
+                $query = $query->where($key, $value);
             }
         }
 
