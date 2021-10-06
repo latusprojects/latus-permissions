@@ -121,4 +121,13 @@ interface RoleRepository extends Repository
      * @return Collection
      */
     public function getParents(Role $role): Collection;
+
+    /**
+     * Add a child-role to a role
+     *
+     * @param Role $role
+     * @param Role $childRole
+     * @return mixed
+     */
+    public function addChild(Role $role, Role $childRole): void;
 }
