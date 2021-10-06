@@ -17,9 +17,9 @@ trait ResolvesPermissions
     /**
      * @see Permissible::resolvePermissions()
      */
-    public function resolvePermissions(): Collection
+    public function resolvePermissions(array $resolvedRelationships = []): Collection
     {
-        return Cache::remember($this->getTable() . '_' . $this->getKey(), 60, function () {
+        return Cache::remember($this->getTable() . '_' . $this->getKey(), 60, function () use ($resolvedRelationships) {
             $simple_permissions = [];
 
             if (!empty($this->resolvable_relationship_methods)) {
@@ -30,7 +30,22 @@ trait ResolvesPermissions
                     $relationships = $this->$relationship_method()->get();
 
                     foreach ($relationships as $relationship) {
-                        $simple_permissions += $relationship->resolvePermissions()->toArray();
+                        $relationshipClass = get_class($relationship);
+                        $relationshipId = $relationship->id;
+                        /**
+                         * Prevents infinite recursion
+                         **/
+                        if (isset($resolvedRelationships[$relationshipClass])
+                            && in_array($relationshipId, $resolvedRelationships[$relationshipClass])) {
+                            continue;
+                        }
+
+                        if (!isset($resolvedRelationships[$relationshipClass])) {
+                            $resolvedRelationships[$relationshipClass] = [];
+                        }
+                        $resolvedRelationships[$relationshipClass][] = $relationshipId;
+
+                        $simple_permissions += $relationship->resolvePermissions($resolvedRelationships)->toArray();
                     }
                 }
             }

@@ -109,4 +109,20 @@ class RoleRepository extends EloquentRepository implements RoleRepositoryContrac
     {
         return $role->users()->where('user_id', $user->id)->exists();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getChildren(Role $role): Collection
+    {
+        return $role->children()->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getParents(Role $role): Collection
+    {
+        return $role->parents()->get();
+    }
 }
