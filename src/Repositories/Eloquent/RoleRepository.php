@@ -125,4 +125,12 @@ class RoleRepository extends EloquentRepository implements RoleRepositoryContrac
     {
         return $role->parents()->get();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function addChild(Role $role, Role $childRole): void
+    {
+        $role->children()->attach($childRole);
+    }
 }

@@ -197,5 +197,40 @@ class RoleService
         return $this->roleRepository->hasUser($role, $user);
     }
 
+    /**
+     * Gets all child-roles of a role
+     *
+     * @param Role $role
+     * @return Collection
+     * @see RoleRepository::getChildren()
+     */
+    public function getChildren(Role $role): Collection
+    {
+        return $this->roleRepository->getChildren($role);
+    }
+
+    /**
+     * Gets all parent-roles of a role
+     *
+     * @param Role $role
+     * @return Collection
+     */
+    public function getParents(Role $role): Collection
+    {
+        return $this->roleRepository->getParents($role);
+    }
+
+    /**
+     * Add a child-role to a role
+     *
+     * @param Role $role
+     * @param Role $childRole
+     * @return mixed
+     */
+    public function addChild(Role $role, Role $childRole): void
+    {
+        $this->roleRepository->addChild($role, $childRole);
+    }
+
 
 }
