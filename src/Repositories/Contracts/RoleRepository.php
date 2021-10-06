@@ -105,4 +105,20 @@ interface RoleRepository extends Repository
      * @return bool
      */
     public function hasUser(Role $role, User $user): bool;
+
+    /**
+     * Gets all child-roles
+     *
+     * @param Role $role
+     * @return Collection
+     */
+    public function getChildren(Role $role): Collection;
+
+    /**
+     * Gets all parent-roles
+     *
+     * @param Role $role
+     * @return Collection
+     */
+    public function getParents(Role $role): Collection;
 }
