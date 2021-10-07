@@ -9,6 +9,10 @@ class Role extends ModelWithPermissible
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'level'
+    ];
+
     protected array $resolvable_relationship_methods = [
         'children'
     ];
