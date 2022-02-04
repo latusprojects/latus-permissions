@@ -219,9 +219,9 @@ class UserService
      * @return bool
      * @see UserRepository::hasPermission()
      */
-    public function userHasPermission(User $user, Permission $permission): bool
+    public function userHasPermission(User|null $user, Permission $permission): bool
     {
-        return $this->userRepository->hasPermission($user, $permission);
+        return $user && $this->userRepository->hasPermission($user, $permission);
     }
 
     /**
@@ -232,9 +232,9 @@ class UserService
      * @return bool
      * @see UserRepository::hasPermissionByString()
      */
-    public function userHasPermissionByString(User $user, string $permission): bool
+    public function userHasPermissionByString(User|null $user, string $permission): bool
     {
-        return $this->userRepository->hasPermissionByString($user, $permission);
+        return $user && $this->userRepository->hasPermissionByString($user, $permission);
     }
 
     /**
@@ -245,9 +245,9 @@ class UserService
      * @return bool
      * @see UserRepository::hasOnePermissionByStrings()
      */
-    public function userHasOnePermissionByStrings(User $user, array $permissions): bool
+    public function userHasOnePermissionByStrings(User|null $user, array $permissions): bool
     {
-        return $this->userRepository->hasOnePermissionByStrings($user, $permissions);
+        return $user && $this->userRepository->hasOnePermissionByStrings($user, $permissions);
     }
 
     /**

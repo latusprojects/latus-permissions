@@ -23,6 +23,9 @@
       "providers": [
         "Latus\\Permissions\\Providers\\PermissionsServiceProvider"
       ]
+    },
+    "branch-alias": {
+      "dev-develop": "0.2.x-dev"
     }
   },
   "repositories": {
