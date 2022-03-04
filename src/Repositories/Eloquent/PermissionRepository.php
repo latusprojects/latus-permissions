@@ -80,4 +80,12 @@ class PermissionRepository extends EloquentRepository implements PermissionRepos
     {
         return $permission->users()->get();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): Collection
+    {
+        return $this->relatedModel()->all();
+    }
 }

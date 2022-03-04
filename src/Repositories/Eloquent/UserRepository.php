@@ -165,4 +165,12 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
         $user->setRememberToken($token);
         $user->save();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): Collection
+    {
+        return $this->relatedModel()->all();
+    }
 }

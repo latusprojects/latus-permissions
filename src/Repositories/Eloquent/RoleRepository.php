@@ -133,4 +133,12 @@ class RoleRepository extends EloquentRepository implements RoleRepositoryContrac
     {
         $role->children()->attach($childRole);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): Collection
+    {
+        return $this->relatedModel()->all();
+    }
 }
