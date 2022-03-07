@@ -148,4 +148,11 @@ interface UserRepository extends Repository
      * @return mixed
      */
     public function updateRememberToken(User $user, string $token);
+
+    /**
+     * Get all users
+     *
+     * @return Collection
+     */
+    public function all(): Collection;
 }

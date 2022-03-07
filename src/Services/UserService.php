@@ -262,4 +262,14 @@ class UserService
         $this->userRepository->updateRememberToken($user, $token);
     }
 
+    /**
+     * Retrieves all users
+     *
+     * @return Collection
+     */
+    public function all(): Collection
+    {
+        return $this->userRepository->all();
+    }
+
 }

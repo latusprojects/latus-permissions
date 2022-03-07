@@ -232,5 +232,14 @@ class RoleService
         $this->roleRepository->addChild($role, $childRole);
     }
 
+    /**
+     * Retrieves all roles
+     *
+     * @return Collection
+     */
+    public function all(): Collection
+    {
+        return $this->roleRepository->all();
+    }
 
 }

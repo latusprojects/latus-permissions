@@ -130,4 +130,11 @@ interface RoleRepository extends Repository
      * @return mixed
      */
     public function addChild(Role $role, Role $childRole): void;
+
+    /**
+     * Get all roles
+     *
+     * @return Collection
+     */
+    public function all(): Collection;
 }

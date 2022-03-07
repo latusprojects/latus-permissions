@@ -70,4 +70,11 @@ interface PermissionRepository extends Repository
      * @return Collection
      */
     public function getUsers(Permission $permission): Collection;
+
+    /**
+     * Get all permissions
+     *
+     * @return Collection
+     */
+    public function all(): Collection;
 }

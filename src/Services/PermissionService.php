@@ -146,4 +146,14 @@ class PermissionService
     {
         return $this->permissionRepository->getUsers($permission);
     }
+
+    /**
+     * Retrieves all permissions
+     *
+     * @return Collection
+     */
+    public function all(): Collection
+    {
+        return $this->permissionRepository->all();
+    }
 }
