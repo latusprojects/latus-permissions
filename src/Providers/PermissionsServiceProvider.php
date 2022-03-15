@@ -32,6 +32,8 @@ class PermissionsServiceProvider extends ServiceProvider
         }
 
         $this->app->register(AuthServiceProvider::class);
+
+        $this->mergeConfigFrom(__DIR__ . '/../../config/permissions.php', 'latus-permissions');
     }
 
     /**
