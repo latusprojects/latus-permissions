@@ -21,6 +21,12 @@ class RoleService
         'level' => 'required|integer|min:0|max:65556',
     ];
 
+    public static array $update_validation_rules = [
+        'name' => 'required|string|min:3',
+        'level' => 'required|integer|min:0|max:65556',
+    ];
+
+
     /**
      * @param RoleRepository $roleRepository
      */
@@ -47,6 +53,26 @@ class RoleService
         }
 
         return $this->roleRepository->create($attributes);
+    }
+
+    /**
+     * Validates attributes, then attempts to update a role on success
+     * or throw an exception on failure
+     *
+     * @param Role $role
+     * @param array $attributes
+     * @return Model
+     * @see Repository::update()
+     */
+    public function updateRole(Role $role, array $attributes): Model
+    {
+        $validator = Validator::make($attributes, self::$update_validation_rules);
+
+        if ($validator->fails()) {
+            throw new \InvalidArgumentException($validator->errors()->first());
+        }
+
+        return $this->roleRepository->update($role, $attributes);
     }
 
     /**

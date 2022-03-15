@@ -18,6 +18,16 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     /**
      * @inheritDoc
      */
+    public function update(User $user, array $attributes): User
+    {
+        $user->update($attributes);
+
+        return $user;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function relatedModel(): Model
     {
         return new User();

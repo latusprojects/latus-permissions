@@ -17,6 +17,16 @@ class RoleRepository extends EloquentRepository implements RoleRepositoryContrac
     /**
      * @inheritDoc
      */
+    public function update(Role $role, array $attributes): Role
+    {
+        $role->update($attributes);
+
+        return $role;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function relatedModel(): Model
     {
         return new Role();

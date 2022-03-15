@@ -18,7 +18,13 @@ trait HasRoles
      */
     public function primaryRole(): Role
     {
-        return $this->roles()->orderBy('level', 'desc')->first();
+        $primaryRole = $this->roles()->orderBy('level', 'desc')->first();
+
+        if (!$primaryRole) {
+            return Role::where('name', config('latus-permissions.default_role'))->first();
+        }
+
+        return $primaryRole;
     }
 
     /**

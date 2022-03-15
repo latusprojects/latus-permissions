@@ -13,6 +13,15 @@ use Latus\Repositories\Contracts\Repository;
 interface RoleRepository extends Repository
 {
     /**
+     * Attempts to update a role model
+     *
+     * @param Role $role
+     * @param array $attributes
+     * @return mixed
+     */
+    public function update(Role $role, array $attributes): Role;
+
+    /**
      * Attempts to delete a role model
      *
      * @param Role $role
