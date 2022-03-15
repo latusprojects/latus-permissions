@@ -13,6 +13,15 @@ use Latus\Repositories\Contracts\Repository;
 interface UserRepository extends Repository
 {
     /**
+     * Attempts to update a user model
+     *
+     * @param User $user
+     * @param array $attributes
+     * @return mixed
+     */
+    public function update(User $user, array $attributes): User;
+
+    /**
      * Attempts to delete a user model
      *
      * @param User $user

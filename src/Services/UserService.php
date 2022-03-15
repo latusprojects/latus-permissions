@@ -23,6 +23,12 @@ class UserService
         'password' => 'required|string|min:10|max:255',
     ];
 
+    public static array $update_validation_rules = [
+        'name' => 'sometimes|string|min:3|max:255',
+        'email' => 'sometimes|email',
+        'password' => 'sometimes|string|min:10|max:255',
+    ];
+
     /**
      * @param UserRepository $userRepository
      */
@@ -50,6 +56,26 @@ class UserService
         $attributes['password'] = Hash::make($attributes['password']);
 
         return $this->userRepository->create($attributes);
+    }
+
+    /**
+     * Validates attributes, then attempts to update a user on success
+     * or throw an exception on failure
+     *
+     * @param User $user
+     * @param array $attributes
+     * @return Model
+     * @see Repository::update()
+     */
+    public function updateUser(User $user, array $attributes): Model
+    {
+        $validator = Validator::make($attributes, self::$update_validation_rules);
+
+        if ($validator->fails()) {
+            throw new \InvalidArgumentException($validator->errors()->first());
+        }
+
+        return $this->userRepository->update($user, $attributes);
     }
 
     /**
