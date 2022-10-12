@@ -4,10 +4,11 @@ namespace Latus\Permissions\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
+use Parental\HasChildren;
 
 class User extends AuthenticatableWithRoles
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasChildren;
 
     /**
      * The attributes that are mass assignable.
