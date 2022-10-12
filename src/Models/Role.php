@@ -4,10 +4,11 @@ namespace Latus\Permissions\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Parental\HasChildren;
 
 class Role extends ModelWithPermissible
 {
-    use HasFactory;
+    use HasFactory, HasChildren;
 
     protected $fillable = [
         'name', 'level'
