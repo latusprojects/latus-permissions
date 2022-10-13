@@ -5,11 +5,11 @@ namespace Latus\Permissions\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Parental\HasChildren;
+use Latus\Permissions\Helpers\Classes;
 
 class Permission extends Model
 {
-    use HasFactory, HasChildren;
+    use HasFactory;
 
     protected $fillable = ['name', 'guard'];
 
@@ -20,7 +20,7 @@ class Permission extends Model
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class)->withTimestamps();
+        return $this->belongsToMany(Classes::role())->withTimestamps();
     }
 
     /**
@@ -30,6 +30,6 @@ class Permission extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(Classes::user())->withTimestamps();
     }
 }

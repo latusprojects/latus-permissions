@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Latus\Permissions\Models\Traits;
 
-
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Latus\Permissions\Helpers\Classes;
 use Latus\Permissions\Models\Role;
 
 trait HasRoles
@@ -21,7 +20,7 @@ trait HasRoles
         $primaryRole = $this->roles()->orderBy('level', 'desc')->first();
 
         if (!$primaryRole) {
-            return Role::where('name', config('latus-permissions.default_role'))->first();
+            return Classes::role()::where('name', config('latus-permissions.default_role'))->first();
         }
 
         return $primaryRole;
@@ -34,6 +33,6 @@ trait HasRoles
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class)->withTimestamps();
+        return $this->belongsToMany(Classes::role())->withTimestamps();
     }
 }

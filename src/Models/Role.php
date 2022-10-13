@@ -4,11 +4,12 @@ namespace Latus\Permissions\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Parental\HasChildren;
+use Latus\Permissions\Helpers\Classes;
+
 
 class Role extends ModelWithPermissible
 {
-    use HasFactory, HasChildren;
+    use HasFactory;
 
     protected $fillable = [
         'name', 'level'
@@ -25,7 +26,7 @@ class Role extends ModelWithPermissible
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(Classes::user())->withTimestamps();
     }
 
     /**
@@ -35,7 +36,7 @@ class Role extends ModelWithPermissible
      */
     public function parents(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'role_child_role', 'child_role_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(Classes::role(), 'role_child_role', 'child_role_id', 'role_id')->withTimestamps();
     }
 
     /**
@@ -45,7 +46,7 @@ class Role extends ModelWithPermissible
      */
     public function children(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'role_child_role', 'role_id', 'child_role_id')->withTimestamps();
+        return $this->belongsToMany(Classes::role(), 'role_child_role', 'role_id', 'child_role_id')->withTimestamps();
     }
 
 }

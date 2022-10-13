@@ -6,11 +6,12 @@ namespace Latus\Permissions\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Latus\Permissions\Helpers\Classes;
 use Latus\Permissions\Models\Permission;
 use Latus\Permissions\Models\Role;
 use Latus\Permissions\Models\User;
-use Latus\Repositories\EloquentRepository;
 use Latus\Permissions\Repositories\Contracts\RoleRepository as RoleRepositoryContract;
+use Latus\Repositories\EloquentRepository;
 
 class RoleRepository extends EloquentRepository implements RoleRepositoryContract
 {
@@ -27,14 +28,6 @@ class RoleRepository extends EloquentRepository implements RoleRepositoryContrac
     /**
      * @inheritDoc
      */
-    public function relatedModel(): Model
-    {
-        return new Role();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function delete(Role $role)
     {
         $role->delete();
@@ -46,6 +39,14 @@ class RoleRepository extends EloquentRepository implements RoleRepositoryContrac
     public function findByName(string $name): Role|null
     {
         return $this->relatedModel()->where('name', $name)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function relatedModel(): Model
+    {
+        return new (Classes::role());
     }
 
     /**

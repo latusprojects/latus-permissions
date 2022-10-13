@@ -6,8 +6,8 @@ namespace Latus\Permissions\Models\Traits;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Latus\Permissions\Helpers\Classes;
 use Latus\Permissions\Models\Contracts\Permissible;
-use Latus\Permissions\Models\Permission;
 
 trait ResolvesPermissions
 {
@@ -60,7 +60,7 @@ trait ResolvesPermissions
             $wildcard_permissions = $this->permissions()->where('name', 'like', '%.*')->get()->pluck('guard', 'name')->all();
 
             foreach ($wildcard_permissions as $wildcard_permission => $wildcard_permission_guard) {
-                $simple_permissions += Permission::where('name', 'like', substr($wildcard_permission, 0, -1) . '%')
+                $simple_permissions += Classes::permission()::where('name', 'like', substr($wildcard_permission, 0, -1) . '%')
                     ->where('name', 'not like', '%.*')
                     ->whereNotIn('name', array_keys($simple_permissions))
                     ->get()
