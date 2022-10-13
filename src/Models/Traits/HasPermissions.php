@@ -2,9 +2,9 @@
 
 namespace Latus\Permissions\Models\Traits;
 
-use Latus\Permissions\Models\Contracts\Permissible;
-use Latus\Permissions\Models\Permission;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Latus\Permissions\Helpers\Classes;
+use Latus\Permissions\Models\Contracts\Permissible;
 
 trait HasPermissions
 {
@@ -36,7 +36,7 @@ trait HasPermissions
      */
     public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class)->withTimestamps();
+        return $this->belongsToMany(Classes::permission())->withTimestamps();
     }
 
 }

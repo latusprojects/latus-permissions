@@ -7,6 +7,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Latus\Permissions\Helpers\Classes;
 use Latus\Permissions\Models\Permission;
 use Latus\Permissions\Models\Role;
 use Latus\Permissions\Models\User;
@@ -28,14 +29,6 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     /**
      * @inheritDoc
      */
-    public function relatedModel(): Model
-    {
-        return new User();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function delete(User $user)
     {
         $user->delete();
@@ -47,6 +40,14 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     public function findByName(string $name): User|null
     {
         return $this->relatedModel()->where('name', $name)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function relatedModel(): Model
+    {
+        return new (Classes::user());
     }
 
     /**
@@ -146,17 +147,17 @@ class UserRepository extends EloquentRepository implements UserRepositoryContrac
     /**
      * @inheritDoc
      */
-    public function hasPermission(User $user, Permission $permission): bool
+    public function hasPermissionByString(User $user, string $permission): bool
     {
-        return $user->resolvePermissions()->contains($permission);
+        return $user->hasPermission($permission);
     }
 
     /**
      * @inheritDoc
      */
-    public function hasPermissionByString(User $user, string $permission): bool
+    public function hasPermission(User $user, Permission $permission): bool
     {
-        return $user->hasPermission($permission);
+        return $user->resolvePermissions()->contains($permission);
     }
 
     /**

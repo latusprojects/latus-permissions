@@ -6,21 +6,14 @@ namespace Latus\Permissions\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Latus\Permissions\Helpers\Classes;
 use Latus\Permissions\Models\Contracts\Permissible;
 use Latus\Permissions\Models\Permission;
-use Latus\Repositories\EloquentRepository;
 use Latus\Permissions\Repositories\Contracts\PermissionRepository as PermissionRepositoryContract;
+use Latus\Repositories\EloquentRepository;
 
 class PermissionRepository extends EloquentRepository implements PermissionRepositoryContract
 {
-
-    /**
-     * @inheritDoc
-     */
-    public function relatedModel(): Model
-    {
-        return new Permission();
-    }
 
     /**
      * @inheritDoc
@@ -36,6 +29,14 @@ class PermissionRepository extends EloquentRepository implements PermissionRepos
     public function findByName(string $name): Permission|null
     {
         return $this->relatedModel()->where('name', $name)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function relatedModel(): Model
+    {
+        return new (Classes::permission());
     }
 
     /**
