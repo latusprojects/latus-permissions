@@ -9,9 +9,9 @@
     }
   ],
   "require": {
-    "php": "^8.0",
-    "laravel/framework": "^9",
-    "latusprojects/latus-model-repositories": "0.1.*"
+    "php": "^8.2",
+    "laravel/framework": "^10",
+    "latusprojects/latus-model-repositories": "0.2.*"
   },
   "autoload": {
     "psr-4": {
@@ -25,5 +25,11 @@
       ]
     }
   },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://latusprojects.repo.repman.io"
+    }
+  ],
   "minimum-stability": "dev"
 }
